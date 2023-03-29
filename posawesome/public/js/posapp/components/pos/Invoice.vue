@@ -478,7 +478,7 @@
                     cols="8"
                     v-if="item.has_batch_no == 1 || item.batch_no"
                   >
-                    <v-autocomplete
+                    <!-- <v-autocomplete
                       v-model="item.batch_no"
                       :items="item.batch_no_data"
                       item-text="batch_no"
@@ -502,7 +502,7 @@
                           </v-list-item-content>
                         </template>
                       </template>
-                    </v-autocomplete>
+                    </v-autocomplete> -->
                   </v-col>
                   <v-col
                     cols="4"
@@ -1247,18 +1247,18 @@ export default {
             value = false;
           }
         }
-        if (item.has_batch_no) {
-          if (item.stock_qty > item.actual_batch_qty) {
-            evntBus.$emit('show_mesage', {
-              text: __(
-                `The existing batch quantity of item {0} is not enough`,
-                [item.item_name]
-              ),
-              color: 'error',
-            });
-            value = false;
-          }
-        }
+        // if (item.has_batch_no) {
+        //   if (item.stock_qty > item.actual_batch_qty) {
+        //     evntBus.$emit('show_mesage', {
+        //       text: __(
+        //         `The existing batch quantity of item {0} is not enough`,
+        //         [item.item_name]
+        //       ),
+        //       color: 'error',
+        //     });
+        //     value = false;
+        //   }
+        // }
         if (this.pos_profile.posa_allow_user_to_edit_additional_discount) {
           const clac_percentage = (this.discount_amount / this.Total) * 100;
           if (clac_percentage > this.pos_profile.posa_max_discount_allowed) {

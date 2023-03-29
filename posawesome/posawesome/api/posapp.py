@@ -809,7 +809,9 @@ def get_item_detail(item, doc=None, warehouse=None, price_list=None):
             item_code, warehouse, item.get("qty"), False, item.get("d")
         )
         if batch_no:
-            item["batch_no"] = batch_no.get("batch_no")
+            frappe.errprint(batch_no)
+            # .get("batch_no")
+            item["batch_no"] = batch_no
     item["selling_price_list"] = price_list
     max_discount = frappe.get_value("Item", item_code, "max_discount")
     res = get_item_details(

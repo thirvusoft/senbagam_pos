@@ -7,9 +7,9 @@
 
 ---
 ### core code changes for serial no selct without batch no selection 
-stock_controller.py line 88 - 93 command
-serial_no.py - line 406 - 410 command
-invoice.vue - line 1250 - 1261,481 - 505 command
+stock_controller.py line 88 - 93 command<br>
+serial_no.py - line 406 - 410 command<br>
+invoice.vue - line 1250 - 1261,481 - 505 command<br>
  
 ### Main Features
 

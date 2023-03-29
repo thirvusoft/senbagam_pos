@@ -429,9 +429,11 @@
                     cols="12"
                     v-if="item.has_serial_no == 1 || item.serial_no"
                   >
-                    <v-autocomplete
+                     <!-- Customized by thirvusoft  -->
+                     <v-autocomplete
                       v-model="item.serial_no_selected"
                       :items="item.serial_no_data"
+                      ref="serial_no"
                       item-text="serial_no"
                       outlined
                       dense
@@ -440,8 +442,10 @@
                       small-chips
                       :label="frappe._('Serial No')"
                       multiple
+                      @focus="hide_serial_no_list()"   
                       @change="set_serial_no(item)"
                     ></v-autocomplete>
+                    <!-- End Customization -->
                   </v-col>
                   <!-- <v-col
                     cols="4"
@@ -504,7 +508,7 @@
                       </template>
                     </v-autocomplete>
                   </v-col> -->
-                    </v-autocomplete> -->
+                    </v-autocomplete> 
                   </v-col>
                   <v-col
                     cols="4"
@@ -1605,7 +1609,24 @@ export default {
     calc_sotck_gty(item, value) {
       item.stock_qty = item.conversion_factor * value;
     },
+    // Customized by thirvusoft
+    hide_serial_no_list() {
+      if (!this.$refs.serial_no.$refs.menu.$refs.content) {
+        setTimeout(() => {
+          this.$refs.serial_no.$refs.menu.$refs.content.hidden = false
+        if (this.invoice_doc.is_return) {
+          this.$refs.serial_no.$refs.menu.$refs.content.hidden = true
+        }
+        }, 1)  
+      } else {
+        this.$refs.serial_no.$refs.menu.$refs.content.hidden = false
+        if (this.invoice_doc.is_return) {
+          this.$refs.serial_no.$refs.menu.$refs.content.hidden = true
+        }
+      }
 
+    },
+    // Customization End
     set_serial_no(item) {
       if (!item.has_serial_no) return;
       item.serial_no = '';

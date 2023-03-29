@@ -6,7 +6,11 @@
 #### An open-source Point of Sale for [Erpnext](https://github.com/frappe/erpnext) using [Vue.js](https://github.com/vuejs/vue) and [Vuetify](https://github.com/vuetifyjs/vuetify)
 
 ---
-
+### core code changes for serial no selct without batch no selection 
+stock_controller.py line 88 - 93 command
+serial_no.py - line 406 - 410 command
+invoice.vue - line 1250 - 1261,481 - 505 command
+ 
 ### Main Features
 
 1. Supports Erpnext Version 12 & 13

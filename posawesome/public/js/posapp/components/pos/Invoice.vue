@@ -1358,7 +1358,7 @@ export default {
       const vm = this;
       if (!vm.pos_profile) return;
       frappe.call({
-        method: 'posawesome.posawesome.api.posapp.get_items_details'
+        method: 'posawesome.posawesome.api.posapp.get_items_details',
         async: false,
         args: {
           pos_profile: vm.pos_profile,

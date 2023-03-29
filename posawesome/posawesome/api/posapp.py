@@ -126,7 +126,7 @@ def get_items(pos_profile, price_list=None):
     condition += get_item_group_condition(pos_profile.get("name"))
     if not pos_profile.get("posa_show_template_items"):
         condition += " AND has_variants = 0"
-
+    warehouse = pos_profile.get("warehouse")
     result = []
 
     items_data = frappe.db.sql(
@@ -194,10 +194,11 @@ def get_items(pos_profile, price_list=None):
                 fields=["barcode", "posa_uom"],
             )
             serial_no_data = []
+            ## ts customization add warehouse filter for serial no
             if pos_profile.get("posa_search_serial_no"):
                 serial_no_data = frappe.get_all(
                     "Serial No",
-                    filters={"item_code": item_code, "status": "Active"},
+                    filters={"item_code": item_code, "status": "Active","warehouse":warehouse},
                     fields=["name as serial_no"],
                 )
             if pos_profile.get("posa_display_items_in_stock"):
@@ -757,10 +758,10 @@ def get_items_details(pos_profile, items_data):
                 filters={"parent": item_code},
                 fields=["uom", "conversion_factor"],
             )
-
+            ## ts customization add warehouse filter for serial no
             serial_no_data = frappe.get_all(
                 "Serial No",
-                filters={"item_code": item_code, "status": "Active"},
+                filters={"item_code": item_code, "status": "Active","warehouse":warehouse},
                 fields=["name as serial_no"],
             )
 

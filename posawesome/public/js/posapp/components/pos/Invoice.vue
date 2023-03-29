@@ -478,7 +478,7 @@
                     cols="8"
                     v-if="item.has_batch_no == 1 || item.batch_no"
                   >
-                    <v-autocomplete
+                    <!-- <v-autocomplete
                       v-model="item.batch_no"
                       :items="item.batch_no_data"
                       item-text="batch_no"
@@ -504,6 +504,8 @@
                       </template>
                     </v-autocomplete>
                   </v-col> -->
+                    </v-autocomplete> -->
+                  </v-col>
                   <v-col
                     cols="4"
                     v-if="
@@ -1251,6 +1253,7 @@ export default {
             value = false;
           }
         }
+
         // ts customization
         // if (item.has_batch_no) {
         //   if (item.stock_qty > item.actual_batch_qty) {

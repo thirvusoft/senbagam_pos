@@ -1002,6 +1002,7 @@ export default {
       evntBus.$emit('set_pos_coupons', []);
       this.posa_coupons = [];
       this.customer = this.pos_profile.customer;
+      this.painter=this.pos_profile.painter;
       this.invoice_doc = '';
       this.return_doc = '';
       this.discount_amount = 0;
@@ -1031,6 +1032,7 @@ export default {
       if (!data.name && !data.is_return) {
         this.items = [];
         this.customer = this.pos_profile.customer;
+        this.painter = this.pos_profile.painter;
         this.invoice_doc = '';
         this.discount_amount = 0;
         this.additional_discount_percentage = 0;
@@ -1055,6 +1057,7 @@ export default {
           }
         });
         this.customer = data.customer;
+        this.painter = data.painter;
         this.posting_date = data.posting_date || frappe.datetime.nowdate();
         this.discount_amount = data.discount_amount;
         this.additional_discount_percentage =
@@ -1089,6 +1092,7 @@ export default {
       doc.currency = doc.currency || this.pos_profile.currency;
       doc.naming_series = doc.naming_series || this.pos_profile.naming_series;
       doc.customer = this.customer;
+      doc.painter=this.painter;
       doc.items = this.get_invoice_items();
       doc.total = this.subtotal;
       doc.discount_amount = flt(this.discount_amount);
@@ -2481,6 +2485,7 @@ export default {
     evntBus.$on('register_pos_profile', (data) => {
       this.pos_profile = data.pos_profile;
       this.customer = data.pos_profile.customer;
+      this.painter = data.pos_profile.painter;
       this.pos_opening_shift = data.pos_opening_shift;
       this.stock_settings = data.stock_settings;
       this.float_precision =
@@ -2493,6 +2498,9 @@ export default {
     });
     evntBus.$on('update_customer', (customer) => {
       this.customer = customer;
+    });
+    evntBus.$on('update_painter', (painter) => {
+      this.painter = painter;
     });
     evntBus.$on('new_invoice', () => {
       this.invoice_doc = '';
@@ -2545,6 +2553,9 @@ export default {
       evntBus.$emit('set_customer', this.customer);
       this.fetch_customer_details();
       this.set_delivery_charges();
+    },
+    painter(){
+      evntBus.$emit('set_painter', this.painter);
     },
     customer_info() {
       evntBus.$emit('set_customer_info_to_edit', this.customer_info);

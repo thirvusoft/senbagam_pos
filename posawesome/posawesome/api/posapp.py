@@ -328,6 +328,10 @@ def get_customer_names(pos_profile):
     )
     return customers
 
+@frappe.whitelist()
+def painter_list():
+    painter=frappe.db.sql("""select name from `tabCustomer` where customer_group="Painters" """,as_dict=1,)
+    return painter
 
 @frappe.whitelist()
 def get_sales_person_names():
